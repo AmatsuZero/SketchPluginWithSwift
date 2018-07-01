@@ -68,8 +68,11 @@ final class DJLayer {
         return rect
     }
     
+    let style: DJStyle
+    
     init(layer: NSObject) {
         sketchLayer = layer
+        style = DJStyle(style: layer.value(forKeyPath: "style") as! NSObject)
     }
     
     func removeLayer() {
@@ -77,21 +80,6 @@ final class DJLayer {
         let selector = NSSelectorFromString("removeLayer")
         container.perform(selector, with: sketchLayer)
     }
-}
-
-final class DJStyle {
-    private let style: NSObject
-    
-    init(style: NSObject) {
-        self.style = style
-    }
-    
-}
-
-//MARK: Shadow
-final class DJStyleShadow {
-    private let clazz = NSClassFromString("MSStyleShadow") as AnyObject
-    
 }
 
 //MARK: Shape

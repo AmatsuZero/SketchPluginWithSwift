@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800D9C6E20E8C81200D2699E /* DJStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800D9C6D20E8C81200D2699E /* DJStyle.swift */; };
+		800D9C7020E8CA7500D2699E /* NativeConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800D9C6F20E8CA7500D2699E /* NativeConvertor.swift */; };
 		80267CE920E7331E0071E366 /* SketchPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80267CDF20E7331E0071E366 /* SketchPlugin.framework */; };
 		80267CEE20E7331E0071E366 /* SketchPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80267CED20E7331E0071E366 /* SketchPluginTests.swift */; };
 		80267CF020E7331E0071E366 /* SketchPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 80267CE220E7331E0071E366 /* SketchPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,6 +46,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		800D9C6D20E8C81200D2699E /* DJStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJStyle.swift; sourceTree = "<group>"; };
+		800D9C6F20E8CA7500D2699E /* NativeConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeConvertor.swift; sourceTree = "<group>"; };
 		80267CDF20E7331E0071E366 /* SketchPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SketchPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80267CE220E7331E0071E366 /* SketchPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchPlugin.h; sourceTree = "<group>"; };
 		80267CE320E7331E0071E366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		800D9C6C20E8C7F300D2699E /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				800D9C6D20E8C81200D2699E /* DJStyle.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
 		80267CD520E7331E0071E366 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +143,7 @@
 		80267CFA20E73B0C0071E366 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				800D9C6C20E8C7F300D2699E /* Types */,
 				80267D0020E742770071E366 /* Parser.swift */,
 			);
 			path = Parser;
@@ -150,6 +163,7 @@
 			children = (
 				80267D0520E7487F0071E366 /* InvocationHelper.swift */,
 				80267D1D20E79F3D0071E366 /* TypeName.swift */,
+				800D9C6F20E8CA7500D2699E /* NativeConvertor.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -273,6 +287,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				80267D0620E7487F0071E366 /* InvocationHelper.swift in Sources */,
+				800D9C7020E8CA7500D2699E /* NativeConvertor.swift in Sources */,
+				800D9C6E20E8C81200D2699E /* DJStyle.swift in Sources */,
 				80267CFF20E741CD0071E366 /* FileManipulator.swift in Sources */,
 				80267D1E20E79F3D0071E366 /* TypeName.swift in Sources */,
 				80267D1120E74EB80071E366 /* SketchClasses.swift in Sources */,

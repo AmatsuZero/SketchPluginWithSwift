@@ -9,5 +9,19 @@
 import Foundation
 
 class DJSketchPlugin {
-    
+    let context: NSDictionary
+    let version: String
+    let rootURL: URL
+
+    @objc init(context: NSDictionary) {
+        self.context = context
+        version = context.value(forKeyPath: "plugin.version") as! String
+        #if DEBUG
+            let path = context.value(forKeyPath: "scriptPath") as! String
+            rootURL = URL(fileURLWithPath: path).deletingLastPathComponent()
+        #else
+            let path = context.value(forKey: "plugin.url") as! URL
+            rootURL = path.appendPathComponent("Contents/Sketch")
+        #endif
+    }
 }

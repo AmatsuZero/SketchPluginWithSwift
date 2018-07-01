@@ -9,10 +9,11 @@
 import Foundation
 
 class DJSketchParser {
-    private let context: NSDocument
-    init(context: NSDocument) {
-        self.context = context;
-        
+    private let document: NSDocument
+    
+    init(document: NSDocument) {
+       self.document = document
     }
     
+  
 }
