@@ -10,10 +10,11 @@ import Foundation
 
 class DJSketchParser {
     private let document: NSDocument
+    private let sharedStyles: DJSharedStyleContainer
     
     init(document: NSDocument) {
-       self.document = document
+        self.document = document
+        let container = document.value(forKeyPath: "documentData.layerStyles") as! NSObject
+        sharedStyles = DJSharedStyleContainer(container)
     }
-    
-  
 }

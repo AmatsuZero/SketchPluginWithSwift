@@ -18,4 +18,11 @@ extension NSColor {
         }
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
+    
+    var mscolor: NSObject? {
+        let colorClass = NSClassFromString("MSColor") as AnyObject
+        let mscolor = colorClass.djsp_perform(NSSelectorFromString("colorWithRed:green:blue:alpha:"),
+                                              array: [redComponent, greenComponent, blueComponent, alphaComponent])
+        return mscolor as? NSObject
+    }
 }

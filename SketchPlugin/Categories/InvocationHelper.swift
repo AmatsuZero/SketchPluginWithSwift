@@ -19,6 +19,7 @@ class DJSketchPluginHelper {
         let selector = NSSelectorFromString(initSelector)
         return uninitializedObj?.perform(selector, with: obj)?.takeUnretainedValue()
     }
+    
 }
 
 extension NSObject {

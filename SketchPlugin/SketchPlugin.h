@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NSObject+InvocationHelper.h"
 
 //! Project version number for SketchPlugin.
 FOUNDATION_EXPORT double SketchPluginVersionNumber;
