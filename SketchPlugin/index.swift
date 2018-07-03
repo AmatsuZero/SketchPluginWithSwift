@@ -12,7 +12,10 @@ class DJSketchPlugin {
     let context: NSDictionary
     let version: String
     let rootURL: URL
-
+    private(set) var parser: DJSketchParser!
+    
+    static private(set) var shared: DJSketchPlugin!
+    
     @objc init(context: NSDictionary) {
         self.context = context
         version = context.value(forKeyPath: "plugin.version") as! String

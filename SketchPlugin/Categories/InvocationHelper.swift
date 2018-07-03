@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Daubert. All rights reserved.
 //
 
-import Foundation
+import AppKit
 
 class DJSketchPluginHelper {
     
@@ -19,10 +19,12 @@ class DJSketchPluginHelper {
         let selector = NSSelectorFromString(initSelector)
         return uninitializedObj?.perform(selector, with: obj)?.takeUnretainedValue()
     }
-    
 }
 
 extension NSObject {
-    
+    func toNSColor(mscolor: NSObject, colorSpace: NSColorSpace) -> NSColor? {
+        let selector = NSSelectorFromString("NSColorWithColorSpace:")
+        return mscolor.perform(selector, with: colorSpace).takeUnretainedValue() as? NSColor
+    }
 }
 

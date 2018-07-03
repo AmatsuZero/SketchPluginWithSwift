@@ -12,6 +12,8 @@
 		800D9C7320E9CCA000D2699E /* NSObject+InvocationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 800D9C7120E9CCA000D2699E /* NSObject+InvocationHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		800D9C7420E9CCA000D2699E /* NSObject+InvocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 800D9C7220E9CCA000D2699E /* NSObject+InvocationHelper.m */; };
 		8010BA2120E9F3C200B9F545 /* StyleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8010BA2020E9F3C200B9F545 /* StyleContainer.swift */; };
+		8010BA2320EA38F000B9F545 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8010BA2220EA38F000B9F545 /* Export.swift */; };
+		8010BA2920EA4E9F00B9F545 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8010BA2820EA4E9F00B9F545 /* Symbol.swift */; };
 		80267CE920E7331E0071E366 /* SketchPlugin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80267CDF20E7331E0071E366 /* SketchPlugin.framework */; };
 		80267CEE20E7331E0071E366 /* SketchPluginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80267CED20E7331E0071E366 /* SketchPluginTests.swift */; };
 		80267CF020E7331E0071E366 /* SketchPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 80267CE220E7331E0071E366 /* SketchPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,6 +56,8 @@
 		800D9C7120E9CCA000D2699E /* NSObject+InvocationHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+InvocationHelper.h"; sourceTree = "<group>"; };
 		800D9C7220E9CCA000D2699E /* NSObject+InvocationHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+InvocationHelper.m"; sourceTree = "<group>"; };
 		8010BA2020E9F3C200B9F545 /* StyleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleContainer.swift; sourceTree = "<group>"; };
+		8010BA2220EA38F000B9F545 /* Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
+		8010BA2820EA4E9F00B9F545 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		80267CDF20E7331E0071E366 /* SketchPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SketchPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80267CE220E7331E0071E366 /* SketchPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchPlugin.h; sourceTree = "<group>"; };
 		80267CE320E7331E0071E366 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				800D9C6D20E8C81200D2699E /* DJStyle.swift */,
+				8010BA2820EA4E9F00B9F545 /* Symbol.swift */,
+				8010BA2220EA38F000B9F545 /* Export.swift */,
 				8010BA2020E9F3C200B9F545 /* StyleContainer.swift */,
 			);
 			path = Types;
@@ -300,7 +306,9 @@
 				80267D0620E7487F0071E366 /* InvocationHelper.swift in Sources */,
 				800D9C7020E8CA7500D2699E /* NativeConvertor.swift in Sources */,
 				800D9C6E20E8C81200D2699E /* DJStyle.swift in Sources */,
+				8010BA2320EA38F000B9F545 /* Export.swift in Sources */,
 				80267CFF20E741CD0071E366 /* FileManipulator.swift in Sources */,
+				8010BA2920EA4E9F00B9F545 /* Symbol.swift in Sources */,
 				80267D1E20E79F3D0071E366 /* TypeName.swift in Sources */,
 				80267D1120E74EB80071E366 /* SketchClasses.swift in Sources */,
 				800D9C7420E9CCA000D2699E /* NSObject+InvocationHelper.m in Sources */,

@@ -10,14 +10,14 @@ import Foundation
 import SwiftyJSON
 
 protocol DJSketchObjectProtocol {
-    var className: String { get }
+    static var className: String { get }
     var object: AnyObject? { set get }
     func new(selector: String, with: Any?) -> AnyObject?
 }
 
 extension DJSketchObjectProtocol {
     func new(selector: String = "init", with: Any? = nil) -> AnyObject? {
-        let clazz = NSClassFromString(className) as AnyObject
+        let clazz = NSClassFromString(Self.className) as AnyObject
         let cls = clazz as! NSObjectProtocol
         return DJSketchPluginHelper.convientInitializer(className: cls, initSelector: selector, with: with)
     }
@@ -25,7 +25,7 @@ extension DJSketchObjectProtocol {
 
 //MARK: Layer
 final class DJLayerGroup: DJSketchObjectProtocol {
-    var className: String {
+    static var className: String {
         return "MSLayerGroup"
     }
     lazy var object: AnyObject? = {
@@ -34,10 +34,10 @@ final class DJLayerGroup: DJSketchObjectProtocol {
 }
 
 final class DJShapeGroup: DJSketchObjectProtocol {
-    var className: String { return "MSShapeGroup" }
+    static var className: String { return "MSShapeGroup" }
     var object: AnyObject?
     init(rect: NSRect = .init(x: 0, y: 0, width: 100, height: 100), shape: DJRectangleShape) {
-        let clazz = NSClassFromString("MSShapeGroup") as AnyObject
+        let clazz = NSClassFromString(DJShapeGroup.className) as AnyObject
         let cls = clazz as! NSObjectProtocol
         let selector = NSSelectorFromString("shapeWithPath:")
         object = cls.perform(selector, with: shape.object)?.takeUnretainedValue()
@@ -45,16 +45,79 @@ final class DJShapeGroup: DJSketchObjectProtocol {
 }
 
 final class DJTextLayer: DJSketchObjectProtocol {
-    var className: String {
+    enum TextAlignment: UInt64 {
+        case left = 0, right, center, justify
+    }
+    static var className: String {
         return "MSLayerGroup"
+    }
+    var text: String? {
+        set(newValue) {
+            object?.setValue(newValue, forKeyPath: "stringValue")
+        }
+        get {
+            return object?.value(forKeyPath: "stringValue") as? String
+        }
+    }
+    var alignment: TextAlignment? {
+        set(newValue) {
+            object?.setValue(newValue?.rawValue, forKeyPath: "textAlignment")
+        }
+        get {
+            let rawValue = object?.value(forKeyPath: "textAlignment") as! UInt64
+            return TextAlignment(rawValue: rawValue)
+        }
+    }
+    var fontSize: CGFloat {
+        set(newValue) {
+            object?.setValue(newValue, forKeyPath: "fontSize")
+        }
+        get {
+            return object?.value(forKeyPath: "fontSize") as! CGFloat
+        }
+    }
+    var fontPostscriptName: String? {
+        set(newValue) {
+            object?.setValue(newValue, forKeyPath: "fontPostscriptName")
+        }
+        get {
+            return object?.value(forKeyPath: "fontPostscriptName") as? String
+        }
     }
     lazy var object: AnyObject? = {
         return new()
     }()
+    var lineHeight: CGFloat {
+        set(newValue) {
+            object?.setValue(newValue, forKey: "lineHeight")
+        }
+        get {
+            return object?.value(forKeyPath: "lineHeight") as! CGFloat
+        }
+    }
+    var textColor: NSColor? {
+        didSet {
+            object?.setValue(textColor?.mscolor, forKey: "textColor")
+        }
+    }
+    var characterSpacing: CGFloat {
+        set(newValue) {
+            object?.setValue(newValue, forKey: "characterSpacing")
+        }
+        get {
+            return object?.value(forKeyPath: "characterSpacing") as! CGFloat
+        }
+    }
+    
+    func changeTextColor(color: NSColor)  {
+        let selector = NSSelectorFromString("changeTextColorTo:")
+        _ = object?.perform(selector, with: color)
+    }
 }
 
-final class DJLayer {
+class DJLayer {
     private let sketchLayer: NSObject
+    let exportOptions: DJExportOptions
     private lazy var layers: NSArray? = {
         guard let layers = sketchLayer.value(forKeyPath: "layers") as? NSArray else {
             return nil
@@ -64,7 +127,7 @@ final class DJLayer {
     var radius: CGFloat {
         var value: CGFloat = 0
         if let first = layers?.firstObject as? NSObject,
-            type(of: first).typeName == "MSRectangleShape" {
+            type(of: first).typeName == DJRectangleShape.className {
             value = first.value(forKeyPath: "fixedRadius") as? CGFloat ?? 0
         }
         return value
@@ -75,27 +138,42 @@ final class DJLayer {
         }
         return rect
     }
+    var isVisible: Bool {
+        return sketchLayer.value(forKeyPath: "isVisible") as! Bool
+    }
+    var isLock: Bool {
+        return sketchLayer.value(forKeyPath: "isLock") as! Bool
+    }
+    lazy var parentGroup: NSObject? = {
+        return sketchLayer.value(forKeyPath: "parentGroup") as? NSObject
+    }()
+    
     let style: DJStyle
     init(layer: NSObject) {
         sketchLayer = layer
         style = DJStyle(layer.value(forKeyPath: "style") as! NSObject)
+        exportOptions = DJExportOptions(layer.value(forKeyPath: "exportOptions") as? NSObject)
     }
     
     func removeLayer() {
-        guard let container = sketchLayer.value(forKeyPath: "parentGroup") as? NSObjectProtocol else { return }
+        DJLayer.removeLayer(sketchLayer)
+    }
+    
+    class func removeLayer(_ layer: NSObject) {
+        guard let container = layer.value(forKeyPath: "parentGroup") as? NSObjectProtocol else { return }
         let selector = NSSelectorFromString("removeLayer")
-        container.perform(selector, with: sketchLayer)
+        container.perform(selector, with: layer)
     }
 }
 
 //MARK: Shape
 final class DJRectangleShape: DJSketchObjectProtocol {
-    var className: String {
+    static var className: String {
         return "MSRectangleShape"
     }
     var object: AnyObject?
     init(rect: NSRect = .init(x: 0, y: 0, width: 100, height: 100)) {
-        let clazz = NSClassFromString("MSRectangleShape") as AnyObject
+        let clazz = NSClassFromString(DJRectangleShape.className) as AnyObject
         let cls = clazz as! NSObjectProtocol
         object = DJSketchPluginHelper.convientInitializer(className: cls,
                                                           initSelector: "initWithFrame:",
